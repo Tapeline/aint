@@ -1,2 +1,2 @@
 .env
-*.egg_info
+*.egg-info
