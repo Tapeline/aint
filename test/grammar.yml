@@ -1,0 +1,17 @@
+package:
+  slots:
+    name: string
+  pattern: |
+    package $name;
+
+dataclass:
+  slots:
+    name: string
+    fields: list of type (string) and name (string)
+  pattern: |
+    dataclass $name {
+      $field_1_type $field_1_name;
+      $field_2_type $field_2_name;
+      $field_n_type $field_n_name;
+      # where n >= 0
+    }

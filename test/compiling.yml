@@ -1,0 +1,17 @@
+dataclass:
+  path: $name.java
+  template: |
+    # insert imports if any needed
+    
+    public class $name {
+      public final $field_1_type $field_1_name;
+      public final $field_2_type $field_2_name;
+      public final $field_n_type $field_n_name;
+      
+      # insert a Java constructor that sets every field in order of declaration
+    
+      public String toString() {
+        return "$name($field_a_name=" + $field_a_name + ",$field_b_name=" + $field_b_name + ")";
+        # use only the most important fields that help identify the instance
+      }
+    }

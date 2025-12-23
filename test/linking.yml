@@ -1,0 +1,13 @@
+global-package:
+  select: [package]
+  rule: |
+    if there is a package unit
+    then set workspace attribute "package" to the corresponding value in unit slot
+    if there are not any package units
+    then set workspace attribute "package" to "com.my.app"
+
+dataclass-dependency:
+  select: [dataclass]
+  rule: |
+    if some dataclass A has a field that has a type of some other dataclass B
+    then A should know that it imports class B

@@ -1,0 +1,14 @@
+package me.tapeline.midlegram.data;
+
+dataclass ChatFolder {
+    long id;
+    String name;
+}
+
+dataclass Chat {
+    long id;
+    ChatFolder folder;
+    String name;
+    int unreadCount;
+    String lastMessage;
+}
