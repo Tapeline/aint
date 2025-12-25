@@ -16,4 +16,6 @@ def save_generated(
     generated: list[GeneratedSource]
 ) -> None:
     for source in generated:
-        Path(base_path, source.path).write_text(source.content)
+        path = Path(base_path, source.path)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(source.content)

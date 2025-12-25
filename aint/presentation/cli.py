@@ -39,16 +39,20 @@ def aint_group():
 @aint_group.command("compile")
 @click.argument("input_file", type=click.File("r"))
 @click.argument(
+    "definition_dir",
+    type=click.Path(dir_okay=True, file_okay=False)
+)
+@click.argument(
     "output_base_dir",
     type=click.Path(dir_okay=True, file_okay=False)
 )
-def compile_command(input_file, output_base_dir):
+def compile_command(input_file, definition_dir, output_base_dir):
     client = openai.Client(
         api_key=os.environ["OPENROUTER_API_KEY"],
         base_url="https://openrouter.ai/api/v1"
     )
     ai = AI(client, "kwaipilot/kat-coder-pro:free")
-    loader = YamlDefLoader(Path(input_file.name).parent)
+    loader = YamlDefLoader(Path(definition_dir))
     explainer = AIRuleExplainer(ai)
     parser = AISourceParser(ai)
     linker = AIUnitLinker(ai)

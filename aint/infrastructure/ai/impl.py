@@ -55,7 +55,7 @@ class AISourceParser(SourceParser):
                 PARSE_SOURCE_PROMPT,
                 data={"parse_algo": parse_algo, "code": source.content}
             )
-        )
+        ).removeprefix("```json").removesuffix("```")
         units_list = json.loads(units_json)
         parsed_units = adaptix.load(units_list, list[_ParsedUnit])
         return [
@@ -79,7 +79,7 @@ class AIUnitLinker(UnitLinker):
                 LINK_UNITS_PROMPT,
                 data={"units": units, "workspace": workspace, "rule": rule}
             )
-        )
+        ).removeprefix("```json").removesuffix("```")
         changes_list = json.loads(changes_json)
         for change in changes_list:
             if change["type"] == "set_workspace_attr":
@@ -103,7 +103,7 @@ class AIUnitCompiler(UnitCompiler):
                     COMPILE_UNIT_PROMPT,
                     data={"unit": unit, "workspace": workspace, "rule": rule}
                 )
-            )
+            ).removeprefix("```json").removesuffix("```")
             generated_dict = json.loads(generated_json)
             generated.append(adaptix.load(generated_dict, GeneratedSource))
         return generated
